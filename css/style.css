@@ -1639,9 +1639,11 @@ body {
   display: inline-block;
   height: 18px; /* increased */
   width: 18px; /* increased */
-  margin: 20 15px;
+  margin: 10px 30px;
   position: relative;
   transform: rotate(-45deg);
+  top: 10px;
+  z-index: 50;
 }
 
 /* Round parts */
