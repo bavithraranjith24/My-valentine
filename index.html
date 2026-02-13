@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/icon-font.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" type="image/png" href="img/heart.png" />
+
+    <title>Love | happy valentine's day</title>
+  </head>
+  <body>
+    
+    <header class="header">
+      
+      <div class="header__text-box">
+         <div class="container">  
+    <div class="valentines">
+      <div class="envelope"></div>
+      <div class="front"></div>
+      <div class="carde">
+        <div class="heart"></div>
+      <div class="text">happy valentine's day </br> to my husband and my forever Love</div>      
+      </div>
+      <div class="hearts">
+        <div class="one"></div>
+        <div class="two"></div>
+        <div class="three"></div>
+        <div class="four"></div>
+        <div class="five"></div>
+      </div>
+    </div>
+   
+      
+    </div>
+    <div class="shadow"></div>
+    </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section-about">
+        <div class="u-center-text u-margin-bottom-big">
+          <h2 class="heading-secondary">Exciting for your answers</h2>
+        </div>
+        <div class="row">
+
+  <!-- LEFT SIDE : QUESTIONS -->
+  <div class="col-1-of-2 quiz-column">
+
+    
+
+    <!-- QUESTION 1 -->
+    <div class="question active success" id="q1">
+      <h3> OUR MARRIAGE DATE</h3>
+      <input type="date" id="marriageDate" class="date-input" />
+      <p class="error" id="error1">Hey muttal ithu kuda neyabgam vechuka theriyatha😠 YOU FOOL💔</p>
+      <button onclick="checkDate()" class="next-btn btn btn--pink">Next</button>
+    </div>
+
+    <!-- QUESTION 2 -->
+    <div class="question success" id="q2">
+  <h3>WHERE WE MET ON FIRST DAY ❤️</h3>
+
+  <!-- HINT TEXT -->
+  
+
+  <label><input type="radio" name="place" value="Temple"> Temple</label><br>
+  <label><input type="radio" name="place" value="Periyasamy Tower"> Periyasamy Tower</label><br>
+  <label><input type="radio" name="place" value="Bus Stand"> Bus Stand</label><br>
+  <label><input type="radio" name="place" value="College"> College</label><br>
+
+  <p class="error" id="error2">Ithu konjam deepa yosicha kandipa neyabagam varum chellam..💔 hit kudukata. Click the hit👇 </p>
+
+  <!-- HINT BUTTON -->
+  <button id="hintBtn" class="btn-text" onclick="showHint()" style="display:none;">
+    Show Hint 💡
+  </button>
+  <p id="hint2" class="hint">💡 Hint: It is near "Chathram bus stand" 😉</p>
+
+  <br><br>
+  <button onclick="checkPlace()" class="next-btn btn btn--pink">Next</button>
+</div>
+    <!-- QUESTION 3 -->
+    <div class="question  success" id="q3">
+
+  <!-- QUESTION CONTENT -->
+  <div id="q3Content">
+    <h3>WHEN OUR FIRST TRAVEL 😘</h3>
+
+    <label><input type="radio" name="kiss" value="Namakal">Namakal</label><br>
+    <label><input type="radio" name="kiss" value="Thanjavur">Thanjavur</label><br>
+    <label><input type="radio" name="kiss" value="Yercaud">Yercaud</label><br>
+
+    <p class="error" id="error3">Un kitta kettathu en thappu tha 😜</p>
+    <button onclick="checkKiss()" class="next-btn btn btn--pink ">Finish 💖</button>
+  </div>
+
+  <!-- SUCCESS MESSAGE -->
+  <div id="successMessage" class="success">
+    🎉 Ungaloda sevaiku mikka "Nantri" 🎉
+    LOVE YOU LOT❤️  
+    <br />
+    <a href="#popup" class="btn-text">Here is Your Gift →</a>
+  </div>
+
+</div>
+
+    <script>
+
+function moveLayoutLeft() {
+  document.querySelector(".quiz-column").classList.add("move-left");
+}
+
+      function showQuestion(current, next) { document.getElementById(current).classList.remove("active"); document.getElementById(next).classList.add("active"); }
+ function checkDate() {
+  const selectedDate = document.getElementById("marriageDate").value;
+
+  if (selectedDate === "2018-07-04") {
+    document.getElementById("error1").style.display = "none";
+
+     // 🔥 Hide GIF
+    document.getElementById("imggif").style.display = "none";
+    showQuestion("q1", "q2");
+
+    document.getElementById("img1").classList.add("show");
+
+    moveLayoutLeft(); // move layout after first correct
+  } else {
+    document.getElementById("error1").style.display = "block";
+  }
+}
+let placeWrongCount = 0;
+function checkPlace() {
+  const selected = document.querySelector('input[name="place"]:checked');
+  const errorMsg = document.getElementById("error2");
+  const hintBtn = document.getElementById("hintBtn");
+
+  if (!selected) {
+    errorMsg.style.display = "block";
+    return;
+  }
+
+  if (selected.value === "Periyasamy Tower") {
+    errorMsg.style.display = "none";
+    hintBtn.style.display = "none";
+    showQuestion("q2", "q3");
+    document.getElementById("img2").classList.add("show");
+  } else {
+    placeWrongCount++;
+    errorMsg.style.display = "block";
+
+    // Only show hint button first time wrong
+    if (placeWrongCount === 1) {
+      hintBtn.style.display = "inline-block";
+    }
+  }
+}
+function showHint() {
+  document.getElementById("hint2").style.display = "block";
+  document.getElementById("hintBtn").style.display = "none";
+}
+
+function checkKiss() {
+  const selected = document.querySelector('input[name="kiss"]:checked');
+  const errorMsg = document.getElementById("error3");
+  const successMsg = document.getElementById("successMessage");
+  const q3Content = document.getElementById("q3Content");
+
+  if (!selected) {
+    errorMsg.style.display = "block";
+    return;
+  }
+
+  if (selected.value === "Namakal") {
+    // hide error
+    errorMsg.style.display = "none";
+
+    // hide only question content
+    q3Content.style.display = "none";
+
+    // FORCE show success message
+    successMsg.style.display = "block";
+
+    // show final image
+    document.getElementById("img3").classList.add("show");
+  } else {
+    errorMsg.style.display = "block";
+  }
+}
+    </script>
+
+  </div>
+
+  <!-- RIGHT SIDE : IMAGES -->
+  <div class="col-1-of-3 ">
+
+
+
+
+    <div class="composition">
+
+      <img
+    id="imggif"
+    src="img/Guess Question Mark GIF by Coins And Connections.gif"
+    class="composition__photo"
+  />
+  <img
+    id="img1"
+    src="img/marriage-55.jpg"
+    class="composition__photo composition__photo--p1 hidden-img"
+  />
+
+  <img
+    id="img2"
+    src="img/periyasami-tower-55.jpg"
+    class="composition__photo composition__photo--p2 hidden-img"
+  />
+
+  <img
+    id="img3"
+    src="img/kiss-55.png"
+    class="composition__photo composition__photo--p3 hidden-img"
+  />
+</div>
+
+  </div>
+
+</div>
+
+          
+        </div>
+      </section>
+      <section class="section-features">
+        <div class="row">
+          <div class="col-1-of-4">
+            <div class="feature-box">
+             <img src="img/3.jpg" alt="Logo" class="feature-box__img" />
+             <h3 class="heading-tertiary">1st Year Love Anniversary</h3>
+            </div>
+          </div>
+
+          <div class="col-1-of-4">
+            <div class="feature-box">
+              <img src="img/2.jpg" alt="Logo" class="feature-box__img" />
+             <h3 class="heading-tertiary">1st Year Valentine Celebration</h3>
+            </div>
+          </div>
+
+          <div class="col-1-of-4">
+            <div class="feature-box">
+              <img src="img/1.jpg" alt="Logo" class="feature-box__img" />
+             <h3 class="heading-tertiary">1st Marrige Anniversary</h3>
+            </div>
+          </div>
+
+          <div class="col-1-of-4">
+            <div class="feature-box">
+              <img src="img/4.jpg" alt="Logo" class="feature-box__img" />
+             <h3 class="heading-tertiary">1st Birthday Celebration</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="section-tours" class="section-tours">
+        <div class="u-center-text u-margin-bottom-big">
+          <h2 class="heading-secondary">OUR LOVE SHORTS</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-1-of-3">
+            <div class="card">
+              <div class="card__side card__side--back">
+                <img
+                         id="img1"
+                         src="img/card1.jpg"
+                          class="feature-box__img"
+                   />   
+              </div>
+              <div class="card__side card__side--front ">
+                <div class="card__cta letter">
+                   <p class=""> Relationships last long because two people made a choice to: 
+                    keep it, fight for it, and work for it.</p>
+                    <img
+                         id="img1"
+                         src="img/two.png"
+                          class="card-icon"
+                   />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-1-of-3">
+            <div class="card">
+              <div class="card__side card__side--back">
+                <img
+                         id="img1"
+                         src="img/card2.jpg"
+                          class="feature-box__img"
+                   />
+              </div>
+              <div class="card__side card__side--front ">
+                <div class="card__cta letter">
+                   <p class=""> Relationships last long because two people made a choice to: 
+                    keep it, fight for it, and work for it.</p>
+                    <img
+                         id="img1"
+                         src="img/heart-rate.png"
+                          class="card-icon"
+                   />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-1-of-3">
+            <div class="card">
+              <div class="card__side card__side--back">
+                <img
+                         id="img1"
+                         src="img/card3.jpg"
+                          class="feature-box__img"
+                   />
+              </div>
+              <div class="card__side card__side--front ">
+                <div class="card__cta letter">
+                   <p class=""> Relationships last long because two people made a choice to: 
+                    keep it, fight for it, and work for it.</p>
+                    <img
+                         id="img1"
+                         src="img/hearts.png"
+                          class="card-icon"
+                   />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+      </section>
+
+      
+      
+    </main>
+    
+    <div class="popup" id="popup">
+      <div class="popup__content" >
+        <!-- <div class="popup__left">
+          <img src="img/1-55.jpg" alt="Tour photo" class="popup__img" />
+          <img src="img/2-55.jpg" alt="Tour photo" class="popup__img" />
+        </div> -->
+        <div class="popup__right ">
+          <a href="" class="popup__close">&times;</a>
+          <h2 class="heading-secondary u-margin-bottom-small">
+                  TOGETHER SINCE 
+          </h2>
+               
+           <div id="loveTimer" class="timer-box">
+               </div>
+         <script>
+  function updateLoveTimer() {
+    const startDate = new Date(2018, 6, 4, 0, 0, 0); // 04 July 2018
+    const now = new Date();
+
+    let years = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth() - startDate.getMonth();
+    let days = now.getDate() - startDate.getDate();
+    let hours = now.getHours() - startDate.getHours();
+    let minutes = now.getMinutes() - startDate.getMinutes();
+    let seconds = now.getSeconds() - startDate.getSeconds();
+
+    if (seconds < 0) {
+      seconds += 60;
+      minutes--;
+    }
+
+    if (minutes < 0) {
+      minutes += 60;
+      hours--;
+    }
+
+    if (hours < 0) {
+      hours += 24;
+      days--;
+    }
+
+    if (days < 0) {
+      const prevMonthDays = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+      days += prevMonthDays;
+      months--;
+    }
+
+    if (months < 0) {
+      months += 12;
+      years--;
+    }
+
+    document.getElementById("loveTimer").innerHTML =
+      `❤️ ${years} years, ${months} months, ${days} days, ` +
+      `${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+  }
+
+  // Run immediately
+  updateLoveTimer();
+
+  // Update every second (LIVE)
+  setInterval(updateLoveTimer, 1000);
+</script>
+
+        </div>
+      </div>
+    </div>
+     
+  </body>
+</html>
